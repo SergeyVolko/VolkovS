@@ -3,9 +3,9 @@ package ru.job4j;
 /**
  * Calculate.
  *
- * @author Petr Arsentev (parsentev@yandex.ru)
+ * @author Sergey Volkov (rusobraz@mail.ru)
  * @version $Id$
- * @since 0.1
+ * @since 15.11.2017
  */
 public class Calculate {
     /**
@@ -16,3 +16,4 @@ public class Calculate {
         System.out.println("Hello World");
     }
 }
+
