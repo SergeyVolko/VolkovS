@@ -33,7 +33,7 @@ public class Calculator {
      * @param second
      * @return first div second.
      */
-    public void div (double first, double second) {
+    public void div(double first, double second) {
         this.result = first / second;
     }
     /**
@@ -42,7 +42,7 @@ public class Calculator {
      * @param second
      * @return first multiple second.
      */
-    public void multiple (double first, double second) {
+    public void multiple(double first, double second) {
         this.result = first * second;
     }
     /**
