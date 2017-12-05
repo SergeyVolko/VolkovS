@@ -17,8 +17,7 @@ public class Point {
         int y1 = this.y;
         int x2 = that.x;
         int y2 = that.y;
-        double result = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-        return result;
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 
     public static void main(String[] args) {
