@@ -20,20 +20,6 @@ public class Triangle {
         this.c = c;
     }
 
-    /**
-     * Метод distance.
-     * В качестве параметров принимает копии ссылок на 2 объекта (точки).
-     * По ссылке left ( левая точка) типа Point вызывается метод класса Point distanceTo, в который в
-     * качестве параметра передается ссылка right (правая точка) класса Point.
-     * Затем, при помощи метода distanceTO вычисляется расстояние между точками, и полученное значение возвращается
-     * методом distance.
-     * @param left
-     * @param right
-     * @return
-     */
-    public double distance(Point left, Point right) {
-        return left.distanceTo(right);
-    }
 
     /**
      * Метод period.
@@ -60,9 +46,9 @@ public class Triangle {
         // означают, что через ссылку this на объект типа Triangle вызывается метод данного объекта distance.
         // Метод distance в качестве параметров принимает ссылки на точки a, b и c объекта типа Triangle,
         // на что указывает ключевое слово this и вычисляет длины сторон.
-        double ab = this.distance(this.a, this.b);
-        double bc = this.distance(this.b, this.c);
-        double ac = this.distance(this.a, this.c);
+        double ab = this.a.distanceTo(this.b);
+        double bc = this.b.distanceTo(this.c);
+        double ac = this.a.distanceTo(this.c);
         // Вычисление полупериметра. Параметрами метода period являются длины сторон треугольника.
         double p = this.period(ab, bc, ac);
         // Условие, если this.exist(ab,bc,ac)=true , то вычислится площадь треугольника.

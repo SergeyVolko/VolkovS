@@ -22,19 +22,4 @@ public class TriangleTest {
        // Проверяем результат и ожидаемое значение.
        assertThat(result, closeTo(expected, 0.1));
    }
-
-   @Test
-    public void whenDistanceDiffPointsThen10() {
-        // Создаем два объекта класса Point.
-       Point left = new Point(0, 0);
-       Point right = new Point(10, 0);
-       // Создаем объект треугольник и в качестве точек передаем null.
-       // так как нам не требуется их участие.
-       Triangle triangle = new Triangle(null, null, null);
-       // Вычисляем расстояние между точками.
-       double rsl = triangle.distance(left, right);
-       // Ожидаемый результат равен 10 и он в методе closeTo.
-       // Проверим результат и ожидаемое значение.
-       assertThat(rsl, closeTo(10, 0.01));
-   }
 }
