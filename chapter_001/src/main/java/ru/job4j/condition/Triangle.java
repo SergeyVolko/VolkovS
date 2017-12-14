@@ -51,7 +51,9 @@ public class Triangle {
         double ac = this.a.distanceTo(this.c);
         // Вычисление полупериметра. Параметрами метода period являются длины сторон треугольника.
         double p = this.period(ab, bc, ac);
-        rsl = Math.sqrt(p * (p - ab) * (p - bc) * (p - ac));
+        if (this.exist(ab, bc, ac)) {
+            rsl = Math.sqrt(p * (p - ab) * (p - bc) * (p - ac));
+        }
         return rsl;
     }
 
@@ -64,6 +66,6 @@ public class Triangle {
      * @return
      */
     private boolean exist(double ab, double bc, double ac) {
-        return (ab + bc > ac) && (ab + ac > ab) && (bc + ac > ab) ? true : false;
+        return (ab + bc > ac) && (ab + ac > ab) && (bc + ac > ab);
     }
 }
