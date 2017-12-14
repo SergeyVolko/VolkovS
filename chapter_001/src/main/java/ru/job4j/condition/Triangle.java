@@ -51,10 +51,7 @@ public class Triangle {
         double ac = this.a.distanceTo(this.c);
         // Вычисление полупериметра. Параметрами метода period являются длины сторон треугольника.
         double p = this.period(ab, bc, ac);
-        // Условие, если this.exist(ab,bc,ac)=true , то вычислится площадь треугольника.
-        if (this.exist(ab, bc, ac)) {
-            rsl = Math.sqrt(p * (p - ab) * (p - bc) * (p - ac));
-        }
+        rsl = Math.sqrt(p * (p - ab) * (p - bc) * (p - ac));
         return rsl;
     }
 
