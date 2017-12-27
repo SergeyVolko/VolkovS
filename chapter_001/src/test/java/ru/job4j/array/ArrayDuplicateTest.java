@@ -18,4 +18,20 @@ public class ArrayDuplicateTest {
         String[] result = duplicate.remove(input);
         assertThat(result, arrayContainingInAnyOrder(except));
     }
+    @Test
+    public void whenRemoveDuplicatesThenArrayWithoutAllDuplicate() {
+        ArrayDuplicate duplicate = new ArrayDuplicate();
+        String[] input = {"Привет", "Привет", "Привет", "Привет", "Привет"};
+        String[] except = {"Привет"};
+        String[] result = duplicate.remove(input);
+        assertThat(result, arrayContainingInAnyOrder(except));
+    }
+    @Test
+    public void whenRemoveDuplicatesThenArrayWithoutAllUnique() {
+        ArrayDuplicate duplicate = new ArrayDuplicate();
+        String[] input = {"Один", "Два", "Три", "Четыре", "Пять"};
+        String[] except = {"Один", "Два", "Три", "Четыре", "Пять"};
+        String[] result = duplicate.remove(input);
+        assertThat(result, arrayContainingInAnyOrder(except));
+    }
 }
