@@ -16,4 +16,24 @@ public class QuestionTest {
         int[] arrayResult = question.methodArrays(array1, array2);
         assertArrayEquals(arrayExpect, arrayResult);
     }
+
+    @Test
+    public void whenAddArray1EqualSortAndArray2SortThenArrayResultSort() {
+        Question question = new Question();
+        int[] array2 = {2, 3, 9, 15, 20, 35, 40, 67};
+        int[] array1 = {8, 9, 21, 23, 30, 32, 45, 50};
+        int[] arrayExpect = {2, 3, 8, 9, 9, 15, 20, 21, 23, 30, 32, 35, 40, 45, 50, 67};
+        int[] arrayResult = question.methodArrays(array1, array2);
+        assertArrayEquals(arrayExpect, arrayResult);
+    }
+
+    @Test
+    public void whenAddArray1SmallSortAndArray2BigSortThenArrayResultSort() {
+        Question question = new Question();
+        int[] array2 = {1, 4, 6, 8, 9, 21, 23, 30, 32, 45, 50};
+        int[] array1 = {2, 3, 9, 15, 20, 35, 40, 67};
+        int[] arrayExpect = {1, 2, 3, 4, 6, 8, 9, 9, 15, 20, 21, 23, 30, 32, 35, 40, 45, 50, 67};
+        int[] arrayResult = question.methodArrays(array1, array2);
+        assertArrayEquals(arrayExpect, arrayResult);
+    }
 }
