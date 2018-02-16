@@ -224,7 +224,7 @@ public class StartUI {
      */
     private void showMenu() {
         System.out.printf("///////////////////////////////////////////////////////////////////////%n");
-        System.out.println("Menu%n");
+        System.out.printf("Menu%n");
         System.out.printf("Add the request - %s %n", ADD);
         System.out.printf("Show all applications - %s %n", SHOW);
         System.out.printf("Edit the application id - %s %n", EDITE);
@@ -234,7 +234,6 @@ public class StartUI {
         System.out.printf("The program exit - %s %n", EXIT);
         System.out.printf("///////////////////////////////////////////////////////////////////////%n");
     }
-
     /**
      * Запускт программы.
      *
