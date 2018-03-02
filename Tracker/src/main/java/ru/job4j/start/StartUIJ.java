@@ -36,7 +36,7 @@ public class StartUIJ {
 		menu.fillActions(this.range);
         do {
 			menu.showMenu();
-			key = this.input.ask("Enter the menu item : ", range);
+			key = this.input.ask("Enter the menu item : ", this.range);
             menu.select(key);
         } while (!"6".equals(String.valueOf(key)));
     }
