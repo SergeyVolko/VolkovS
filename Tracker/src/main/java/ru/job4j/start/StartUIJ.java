@@ -33,7 +33,7 @@ public class StartUIJ {
     public void init() {
 		int key;
 		MenuTracker menu = new MenuTracker(this.input, this.tracker);
-		menu.fillActions(range);
+		menu.fillActions(this.range);
         do {
 			menu.showMenu();
 			key = this.input.ask("Enter the menu item : ", range);
