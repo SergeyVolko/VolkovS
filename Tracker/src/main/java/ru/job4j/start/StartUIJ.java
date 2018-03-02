@@ -3,13 +3,14 @@ package ru.job4j.start;
 /**
  * @author Sergey Volkov (rusobraz@mail.ru)
  * @version $Id$
- * @since 27.01.2018
+ * @since 02.03.2018
  */
 import ru.job4j.models.*;
 
 public class StartUIJ {
     
     private final Input input;
+    private int[] range = new int[7];
 
     /**
      * Хранилище заявок.
@@ -32,20 +33,11 @@ public class StartUIJ {
     public void init() {
 		int key;
 		MenuTracker menu = new MenuTracker(this.input, this.tracker);
-		menu.fillActions();
+		menu.fillActions(range);
         do {
 			menu.showMenu();
-			try {
-				key = Integer.valueOf(this.input.ask("Enter the menu item : "));
-			} catch (Exception e) {
-				key = 7;
-			}
-			if (key >= 0 && key <= 6) {
-				menu.select(key);
-			} else  {
-				System.out.printf("Error input\n");
-			}
-            
+			key = this.input.ask("Enter the menu item : ", range);
+            menu.select(key);
         } while (!"6".equals(String.valueOf(key)));
     }
   
@@ -56,6 +48,7 @@ public class StartUIJ {
      * @param args
      */
     public static void main(String[] args) {
-        new StartUIJ(new ConsoleInput(), new Tracker()).init();
+        Input input = new ValidateInput();
+        new StartUIJ(input, new Tracker()).init();
     }
 }
