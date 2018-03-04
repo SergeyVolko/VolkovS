@@ -10,7 +10,6 @@ import ru.job4j.models.*;
 public class StartUIJ {
     
     private final Input input;
-    private int[] range = new int[7];
 
     /**
      * Хранилище заявок.
@@ -33,10 +32,10 @@ public class StartUIJ {
     public void init() {
 		int key;
 		MenuTracker menu = new MenuTracker(this.input, this.tracker);
-		menu.fillActions(this.range);
+		menu.fillActions();
         do {
 			menu.showMenu();
-			key = this.input.ask("Enter the menu item : ", this.range);
+			key = this.input.ask("Enter the menu item : ", menu.getRange());
             menu.select(key);
         } while (!"6".equals(String.valueOf(key)));
     }

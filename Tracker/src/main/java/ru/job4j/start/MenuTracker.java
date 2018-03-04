@@ -11,13 +11,13 @@ public class MenuTracker {
     private Input input;
     private Tracker tracker;
     private UserAction[] actions = new UserAction[7];
-
+    private int[] range = new int[7];
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
 
-    public void fillActions(int[] range) {
+    public void fillActions() {
         this.actions[0] = new MenuTracker.CreatItem();
         this.actions[1] = new MenuTracker.ShowItems();
         this.actions[2] = new MenuTracker.EditItem();
@@ -29,6 +29,10 @@ public class MenuTracker {
         for (int i = 0; i < range.length; i++) {
             range[i] = this.actions[i].key();
         }
+    }
+
+    public int[] getRange() {
+        return this.range;
     }
 
     public void select(int key) {
@@ -218,5 +222,13 @@ public class MenuTracker {
         public String info() {
             return String.format("%s %s", "The program exit -", this.key());
         }
+    }
+
+    public static void main(String[] args) {
+        MenuTracker menu =  new MenuTracker(new ConsoleInput(), new Tracker());
+
+        System.out.println(menu.getRange().toString());
+        menu.fillActions();
+        System.out.println(menu.getRange().toString());
     }
 }
