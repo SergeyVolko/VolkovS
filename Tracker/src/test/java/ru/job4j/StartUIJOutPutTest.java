@@ -14,6 +14,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -124,5 +125,12 @@ import static org.junit.Assert.assertThat;
 							.toString()
 						)
 				);
+	}
+
+	@Test
+	public void whenGetRangeThenArray() {
+		MenuTracker menu = new MenuTracker(new StubInput(new String[]{"1"}), new Tracker());
+		menu.fillActions();
+		assertArrayEquals(menu.getRange(), new int[]{0, 1, 2, 3, 4, 5, 6} );
 	}
  }
