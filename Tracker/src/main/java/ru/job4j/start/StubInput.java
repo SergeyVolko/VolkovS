@@ -1,4 +1,9 @@
 package ru.job4j.start;
+/**
+ * @author Sergey Volkov (rusobraz@mail.ru)
+ * @version $Id$
+ * @since 06.03.2018
+ */
 
 public class StubInput implements Input {
     /**
@@ -37,6 +42,18 @@ public class StubInput implements Input {
 
     @Override
     public int ask(String question, int[] range) {
-        return -1;
+        int key = Integer.valueOf(this.ask(question));
+        boolean exist = false;
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
+            }
+        }
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("Out of menu range.");
+        }
     }
 }

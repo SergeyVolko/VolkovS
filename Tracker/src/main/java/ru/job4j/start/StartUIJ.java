@@ -47,7 +47,7 @@ public class StartUIJ {
      * @param args
      */
     public static void main(String[] args) {
-        Input input = new ValidateInput();
+        Input input = new ValidateInput(new ConsoleInput());
         new StartUIJ(input, new Tracker()).init();
     }
 }

@@ -2,7 +2,7 @@ package ru.job4j.start;
 /**
  * @author Sergey Volkov (rusobraz@mail.ru)
  * @version $Id$
- * @since 03.03.2018
+ * @since 06.03.2018
  */
 
 import java.util.*;
@@ -18,7 +18,7 @@ public class ConsoleInput implements Input {
 
     @Override
     public int ask(String question, int[] range) {
-        int key = Integer.valueOf(this.ask("Enter the menu item : "));
+        int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
         for (int value : range) {
             if (value == key) {
