@@ -12,19 +12,20 @@ public class MenuTracker {
     private Tracker tracker;
     private UserAction[] actions = new UserAction[7];
     private int[] range = new int[7];
+
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
 
     public void fillActions() {
-        this.actions[0] = new MenuTracker.CreatItem();
-        this.actions[1] = new MenuTracker.ShowItems();
-        this.actions[2] = new MenuTracker.EditItem();
-        this.actions[3] = new MenuTracker.DeleteItemId();
-        this.actions[4] = new MenuTracker.FindItemId();
-        this.actions[5] = new MenuTracker.FindItemName();
-        this.actions[6] = new MenuTracker.Exit();
+        this.actions[0] = new MenuTracker.CreatItem("Add the request -", 0);
+        this.actions[1] = new MenuTracker.ShowItems("Show all applications -", 1);
+        this.actions[2] = new MenuTracker.EditItem("Edit the application id -", 2);
+        this.actions[3] = new MenuTracker.DeleteItemId("Delete the request id -", 3);
+        this.actions[4] = new MenuTracker.FindItemId("Select the application id -", 4);
+        this.actions[5] = new MenuTracker.FindItemName("Choose the application name -", 5);
+        this.actions[6] = new MenuTracker.Exit("The program exit -", 6);
 
         for (int i = 0; i < range.length; i++) {
             range[i] = this.actions[i].key();
@@ -48,10 +49,10 @@ public class MenuTracker {
         System.out.printf("//////////////////////////////////////////////////////////\n");
     }
 
-    private static class CreatItem implements UserAction {
-        @Override
-        public int key() {
-            return 0;
+    private static class CreatItem extends BaseAction {
+
+        private CreatItem(String name, int key) {
+            super(name, key);
         }
 
         @Override
@@ -64,16 +65,12 @@ public class MenuTracker {
             System.out.printf("------------ A new application getId : %s -----------\n", item.getId());
         }
 
-        @Override
-        public String info() {
-            return String.format("%s %s", "Add the request -", this.key());
-        }
     }
 
-    private static class ShowItems implements UserAction {
-        @Override
-        public int key() {
-            return 1;
+    private static class ShowItems extends BaseAction {
+
+        private ShowItems(String name, int key) {
+            super(name, key);
         }
 
         @Override
@@ -89,16 +86,12 @@ public class MenuTracker {
             }
         }
 
-        @Override
-        public String info() {
-            return String.format("%s %s", "Show all applications -", this.key());
-        }
     }
 
-    private static class EditItem implements UserAction {
-        @Override
-        public int key() {
-            return 2;
+    private static class EditItem extends BaseAction {
+
+        private EditItem(String name, int key) {
+            super(name, key);
         }
 
         @Override
@@ -121,16 +114,12 @@ public class MenuTracker {
             }
         }
 
-        @Override
-        public String info() {
-            return String.format("%s %s", "Edit the application id -", this.key());
-        }
     }
 
-    private static class DeleteItemId implements UserAction {
-        @Override
-        public int key() {
-            return 3;
+    private static class DeleteItemId extends BaseAction {
+
+        private DeleteItemId(String name, int key) {
+            super(name, key);
         }
 
         @Override
@@ -148,16 +137,12 @@ public class MenuTracker {
             }
         }
 
-        @Override
-        public String info() {
-            return String.format("%s %s", "Delete the request id -", this.key());
-        }
     }
 
-    private static class FindItemId implements UserAction {
-        @Override
-        public int key() {
-            return 4;
+    private static class FindItemId extends BaseAction {
+
+        private FindItemId(String name, int key) {
+            super(name, key);
         }
 
         @Override
@@ -173,17 +158,12 @@ public class MenuTracker {
                 System.out.printf("-----------Application id: %s does not exist-------------------\n", id);
             }
         }
-
-        @Override
-        public String info() {
-            return String.format("%s %s", "Select the application id -", this.key());
-        }
     }
 
-    private static class FindItemName implements UserAction {
-        @Override
-        public int key() {
-            return 5;
+    private static class FindItemName extends BaseAction {
+
+        private FindItemName(String name, int key) {
+            super(name, key);
         }
 
         @Override
@@ -200,35 +180,16 @@ public class MenuTracker {
                 System.out.printf("-------------Applications with the name: %s does not exist-------------------\n", name);
             }
         }
-
-        @Override
-        public String info() {
-            return String.format("%s %s", "Choose the application name -", this.key());
-        }
     }
 
-    private static class Exit implements UserAction {
-        @Override
-        public int key() {
-            return 6;
+    private static class Exit extends BaseAction {
+        private Exit(String name, int key) {
+            super(name, key);
         }
 
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.printf("------------Exit!--------------\n");
         }
-
-        @Override
-        public String info() {
-            return String.format("%s %s", "The program exit -", this.key());
-        }
-    }
-
-    public static void main(String[] args) {
-        MenuTracker menu =  new MenuTracker(new ConsoleInput(), new Tracker());
-
-        System.out.println(menu.getRange().toString());
-        menu.fillActions();
-        System.out.println(menu.getRange().toString());
     }
 }
