@@ -17,10 +17,8 @@ public class CofeMashine {
         int[] massSdacha = new int[sdacha / nominal[1] + 3];
         for (int i = 0; i < nominal.length; i++) {
             if (sdacha >= nominal[i]) {
-                massSdacha[pos] = nominal[i];
-                sdacha -= nominal[i];
-                pos++;
-                i--;
+                massSdacha[pos++] = nominal[i];
+                sdacha -= nominal[i--];
             }
         }
         return Arrays.copyOf(massSdacha, pos);
