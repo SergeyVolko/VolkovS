@@ -23,13 +23,8 @@ public class PhoneDictionary {
      */
     public List<Person> find(String key) {
         List<Person> result = new ArrayList<>();
-        String name, surname, phone, address;
         for (Person value : persons) {
-            name = value.getName();
-            surname = value.getSurname();
-            phone = value.getPhone();
-            address = value.getAddress();
-            if (name.contains(key) || surname.contains(key) || phone.contains(key) || address.contains(key)) {
+            if (value.getName().contains(key) || value.getSurname().contains(key) || value.getPhone().contains(key) || value.getAddress().contains(key)) {
                 result.add(value);
             }
         }
