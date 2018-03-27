@@ -6,6 +6,7 @@ package ru.job4j.search;
  */
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ConvertList {
@@ -31,6 +32,19 @@ public class ConvertList {
         return resultArray;
     }
 
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> integerList = new ArrayList<>();
+        int[] range;
+        Iterator<int[]> it = list.iterator();
+        while (it.hasNext()) {
+            range = it.next();
+            for (int i : range) {
+                integerList.add(i);
+            }
+        }
+        return integerList;
+    }
+
     public static void main(String[] args) {
         ConvertList convertList = new ConvertList();
         int[][] mass = {{1, 2, 3}, {4, 5, 6}, {7}};
@@ -44,5 +58,14 @@ public class ConvertList {
             }
             System.out.println();
         }
+
+        List<int[]> list = new ArrayList<>();
+        list.add(new int[]{1, 2, 3, 4});
+        list.add(new int[]{5, 6, 7});
+        list.add(new int[]{8, 9});
+        List<Integer> integerList1 = convertList.convert(list);
+        String expect = "[1, 2, 3, 4, 5, 6, 7, 8, 9]";
+        String result = String.format("%s", integerList1);
+        System.out.println(expect + " " + result);
     }
 }
