@@ -19,7 +19,6 @@ public class ConvertList {
         return integerList;
     }
 
-    ;
 
     public int[][] toArray(List<Integer> list, int rows) {
         int massLength = (list.size() / rows) + ((list.size() % rows > 0) ? 1 : 0);
