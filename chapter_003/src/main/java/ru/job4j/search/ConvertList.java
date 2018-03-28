@@ -6,8 +6,8 @@ package ru.job4j.search;
  */
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ConvertList {
     public List<Integer> toList(int[][] array) {
@@ -34,14 +34,14 @@ public class ConvertList {
 
     public List<Integer> convert(List<int[]> list) {
         List<Integer> integerList = new ArrayList<>();
-        int[] range;
-        Iterator<int[]> it = list.iterator();
-        while (it.hasNext()) {
-            range = it.next();
-            for (int i : range) {
-                integerList.add(i);
+        list.forEach(new Consumer<int[]>() {
+            @Override
+            public void accept(int[] ints) {
+                for (int i : ints) {
+                    integerList.add(i);
+                }
             }
-        }
+        });
         return integerList;
     }
 
