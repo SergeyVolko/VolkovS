@@ -58,12 +58,12 @@ public class StartUIOutputTest {
                                 .append(showMenu)
                                 .append("------------ Adding new applications --------------\r\n")
                                 .append("------------ A new application getId : ")
-                                .append(tracker.findByName("test name")[0].getId())
+                                .append(tracker.findByName("test name").get(0).getId())
                                 .append(" ---------------\r\n\r\n")
                                 .append(showMenu)
                                 .append("------------Review of all applications---------------\r\n")
                                 .append("0 ) id: ")
-                                .append(tracker.findByName("test name")[0].getId())
+                                .append(tracker.findByName("test name").get(0).getId())
                                 .append(" name: ")
                                 .append("test name")
                                 .append(" description: ")
@@ -81,8 +81,8 @@ public class StartUIOutputTest {
         Tracker tracker = new Tracker();
         tracker.add(new Item("test name", "test desc"));
         tracker.add(new Item("test name second", "test desc second"));
-        String id = tracker.getAll()[0].getId();
-        String idSecond = tracker.getAll()[1].getId();
+        String id = tracker.getAll().get(0).getId();
+        String idSecond = tracker.getAll().get(1).getId();
         String[] massEditDel = {"2", id, "new test name", "new test desc", "2", "0", "xx", "xx", "3", id, "3", id, "4", idSecond, "4", "0", "5", "test name second", "5", "no name", "7", "6"};
         new StartUI(new StubInput(massEditDel), tracker).init();
         assertThat(

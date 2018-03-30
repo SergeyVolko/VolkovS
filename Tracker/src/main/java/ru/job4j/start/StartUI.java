@@ -8,6 +8,8 @@ package ru.job4j.start;
 
 import ru.job4j.models.*;
 
+import java.util.List;
+
 public class StartUI {
     /**
      * Константа меню для добавления новой заявки.
@@ -109,16 +111,13 @@ public class StartUI {
         int count = 0;
         String out = String.format("------------Review of all applications---------------");
         System.out.println(out);
-        Item[] items = this.tracker.getAll();
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] == null) {
-                count++;
-                continue;
-            }
-            out = String.format("%d ) id: %s name: %s description: %s", i, items[i].getId(), items[i].getName(), items[i].getDescription());
+        List<Item> items = this.tracker.getAll();
+        int index = 0;
+        for (Item item : items) {
+            out = String.format("%d ) id: %s name: %s description: %s", index++, item.getId(), item.getName(), item.getDescription());
             System.out.println(out);
         }
-        if (count == items.length) {
+        if (items.size() == 0) {
             out = String.format("-----------You have no bids-------------");
             System.out.println(out);
         }
@@ -163,12 +162,13 @@ public class StartUI {
         String out = String.format("------------The choice of applications by name--------------");
         System.out.println(out);
         String name = this.input.ask("Enter the name of the application / applications :");
-        Item[] items = tracker.findByName(name);
-        if (items != null) {
+        List<Item> items = tracker.findByName(name);
+        int index = 0;
+        if (items.size() != 0) {
             out = String.format("----------You have the following application name %s ----------------", name);
             System.out.println(out);
-            for (int i = 0; i < items.length; i++) {
-                out = String.format("%d ) id: %s description: %s", i, items[i].getId(), items[i].getDescription());
+            for (Item item : items) {
+                out = String.format("%d ) id: %s description: %s", index++, item.getId(), item.getDescription());
                 System.out.println(out);
             }
         } else {
@@ -234,6 +234,7 @@ public class StartUI {
         System.out.printf("The program exit - %s %n", EXIT);
         System.out.printf("///////////////////////////////////////////////////////////////////////%n");
     }
+
     /**
      * Запускт программы.
      *

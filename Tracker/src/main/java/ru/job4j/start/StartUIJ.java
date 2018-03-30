@@ -5,10 +5,11 @@ package ru.job4j.start;
  * @version $Id$
  * @since 02.03.2018
  */
+
 import ru.job4j.models.*;
 
 public class StartUIJ {
-    
+
     private final Input input;
 
     /**
@@ -18,7 +19,8 @@ public class StartUIJ {
 
     /**
      * Конструтор инициализирующий поля.
-     * @param input ввод данных.
+     *
+     * @param input   ввод данных.
      * @param tracker хранилище заявок.
      */
     public StartUIJ(Input input, Tracker tracker) {
@@ -30,20 +32,20 @@ public class StartUIJ {
      * Основой цикл программы.
      */
     public void init() {
-		int key;
-		MenuTracker menu = new MenuTracker(this.input, this.tracker);
-		menu.fillActions();
+        int key;
+        MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        menu.fillActions();
         do {
-			menu.showMenu();
-			key = this.input.ask("Enter the menu item : ", menu.getRange());
+            menu.showMenu();
+            key = this.input.ask("Enter the menu item : ", menu.getRange());
             menu.select(key);
         } while (!"6".equals(String.valueOf(key)));
     }
-  
-    
+
 
     /**
      * Запускт программы.
+     *
      * @param args
      */
     public static void main(String[] args) {

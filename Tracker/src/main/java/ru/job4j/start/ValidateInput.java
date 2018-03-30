@@ -1,5 +1,7 @@
 package ru.job4j.start;
 
+import java.util.List;
+
 /**
  * @author Sergey Volkov (rusobraz@mail.ru)
  * @version $Id$
@@ -19,12 +21,12 @@ public class ValidateInput implements Input {
     }
 
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, List<Integer> list) {
         boolean invalid = true;
         int value = -1;
         do {
             try {
-                value = this.input.ask(question, range);
+                value = this.input.ask(question, list);
                 invalid = false;
             } catch (MenuOutException moe) {
                 System.out.println("Please select key from menu.");
@@ -34,5 +36,4 @@ public class ValidateInput implements Input {
         } while (invalid);
         return value;
     }
-
 }

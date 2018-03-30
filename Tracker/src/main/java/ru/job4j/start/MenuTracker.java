@@ -7,11 +7,15 @@ package ru.job4j.start;
 
 import ru.job4j.models.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MenuTracker {
     private Input input;
     private Tracker tracker;
+    private List<UserAction> userActionList = new ArrayList<>();
     private UserAction[] actions = new UserAction[7];
-    private int[] range = new int[7];
+    private List<Integer> listRange = new ArrayList<>();
 
     public MenuTracker(Input input, Tracker tracker) {
         this.input = input;
@@ -19,32 +23,31 @@ public class MenuTracker {
     }
 
     public void fillActions() {
-        this.actions[0] = new MenuTracker.CreatItem("Add the request -", 0);
-        this.actions[1] = new MenuTracker.ShowItems("Show all applications -", 1);
-        this.actions[2] = new MenuTracker.EditItem("Edit the application id -", 2);
-        this.actions[3] = new MenuTracker.DeleteItemId("Delete the request id -", 3);
-        this.actions[4] = new MenuTracker.FindItemId("Select the application id -", 4);
-        this.actions[5] = new MenuTracker.FindItemName("Choose the application name -", 5);
-        this.actions[6] = new MenuTracker.Exit("The program exit -", 6);
-
-        for (int i = 0; i < range.length; i++) {
-            range[i] = this.actions[i].key();
+        this.userActionList.add(new MenuTracker.CreatItem("Add the request -", 0));
+        this.userActionList.add(new MenuTracker.ShowItems("Show all applications -", 1));
+        this.userActionList.add(new MenuTracker.EditItem("Edit the application id -", 2));
+        this.userActionList.add(new MenuTracker.DeleteItemId("Delete the request id -", 3));
+        this.userActionList.add(new MenuTracker.FindItemId("Select the application id -", 4));
+        this.userActionList.add(new MenuTracker.FindItemName("Choose the application name -", 5));
+        this.userActionList.add(new MenuTracker.Exit("The program exit -", 6));
+        for (UserAction i : this.userActionList) {
+            listRange.add(i.key());
         }
     }
 
-    public int[] getRange() {
-        return this.range;
+    public List<Integer> getRange() {
+        return this.listRange;
     }
 
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        this.userActionList.get(key).execute(this.input, this.tracker);
     }
 
     public void showMenu() {
         System.out.printf("//////////////////////////////////////////////////////////\n");
         System.out.printf("Menu\n");
-        for (UserAction action : this.actions) {
-            System.out.printf("%s\n", action.info());
+        for (UserAction userAction : this.userActionList) {
+            System.out.printf("%s\n", userAction.info());
         }
         System.out.printf("//////////////////////////////////////////////////////////\n");
     }
@@ -76,10 +79,10 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.printf("------------Review of all applications---------------\n");
-            Item[] items = tracker.findAll();
-            if (items != null) {
-                for (int i = 0; i < items.length; i++) {
-                    System.out.printf("%s) id: %s name: %s description: %s\n", i, items[i].getId(), items[i].getName(), items[i].getDescription());
+            if (tracker.getAll().size() != 0) {
+                int index = 0;
+                for (Item item : tracker.getAll()) {
+                    System.out.printf("%s) id: %s name: %s description: %s\n", index++, item.getId(), item.getName(), item.getDescription());
                 }
             } else {
                 System.out.printf("-----------You have no bids-------------\n");
@@ -170,11 +173,12 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.printf("------------The choice of applications by name--------------\n");
             String name = input.ask("Enter the name of the application / applications :");
-            Item[] items = tracker.findByName(name);
-            if (items != null) {
+            List<Item> items = tracker.findByName(name);
+            int index = 0;
+            if (items.size() != 0) {
                 System.out.printf("----------You have the following application name: %s ----------------\n", name);
-                for (int i = 0; i < items.length; i++) {
-                    System.out.printf("%s) id: %s description: %s\n", i, items[i].getId(), items[i].getDescription());
+                for (Item item : items) {
+                    System.out.printf("%s) id: %s description: %s\n", index++, item.getId(), item.getDescription());
                 }
             } else {
                 System.out.printf("-------------Applications with the name: %s does not exist-------------------\n", name);
