@@ -5,10 +5,7 @@ package ru.job4j.search;
  * @since 31.03.2018
  */
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class SortUser {
 
@@ -18,14 +15,28 @@ public class SortUser {
         return userSet;
     }
 
+    public List<UserPerson> sortNameLength(List<UserPerson> userList) {
+        List<UserPerson> personList = new ArrayList<>();
+        personList.addAll(userList);
+        personList.sort(new Comparator<UserPerson>() {
+            @Override
+            public int compare(UserPerson o1, UserPerson o2) {
+                return Integer.compare(o1.getName().length(), o2.getName().length());
+            }
+        });
+        return personList;
+    }
 
-    public static void main(String[] args) {
-        List<UserPerson> userPersonList = new ArrayList<>();
-        userPersonList.add(new UserPerson(23, "Alex"));
-        userPersonList.add(new UserPerson(14, "Ivan"));
-        userPersonList.add(new UserPerson(34, "Oleg"));
-        userPersonList.add(new UserPerson(11, "Stepan"));
-        Set<UserPerson> userPersonSet = new SortUser().sort(userPersonList);
-        System.out.println(userPersonSet);
+    public List<UserPerson> sortByAllFields(List<UserPerson> userPersonList) {
+        List<UserPerson> personList = new ArrayList<>();
+        personList.addAll(userPersonList);
+        personList.sort(new Comparator<UserPerson>() {
+            @Override
+            public int compare(UserPerson o1, UserPerson o2) {
+                final int rsl = o1.getName().compareTo(o2.getName());
+                return (rsl != 0) ? (rsl) : Integer.compare(o1.getAge(), o2.getAge());
+            }
+        });
+        return personList;
     }
 }
