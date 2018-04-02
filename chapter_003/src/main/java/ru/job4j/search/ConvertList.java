@@ -12,7 +12,7 @@ import java.util.List;
 public class ConvertList {
     public List<Integer> toList(int[][] array) {
         List<Integer> integerList = new ArrayList<>();
-        for (int i[] : array) {
+        for (int[] i : array) {
             for (int j : i) {
                 integerList.add(j);
             }

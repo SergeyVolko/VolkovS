@@ -1,4 +1,5 @@
 package ru.job4j.array;
+
 /**
  * @author Sergey Volkov (rusobraz@mail.ru)
  * @version $Id$
@@ -9,7 +10,7 @@ public class Square {
     public int[] calculate(int bound) {
         int[] rsl = new int[bound];
         for (int i = 0; i < rsl.length; i++) {
-            rsl[i] = (i+1)*(i+1);
+            rsl[i] = (i + 1) * (i + 1);
         }
         return rsl;
     }
