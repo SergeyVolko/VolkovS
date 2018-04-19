@@ -9,6 +9,11 @@ public class UserPerson implements Comparable<UserPerson> {
     private int age;
     private String name;
 
+    public UserPerson(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
     public UserPerson(int age, String name) {
         this.age = age;
         this.name = name;

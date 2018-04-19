@@ -9,6 +9,7 @@ public class User {
     private int id;
     private String name;
     private String city;
+    private int age;
 
     public User(int id, String name, String city) {
         this.id = id;
@@ -16,6 +17,10 @@ public class User {
         this.city = city;
     }
 
+    public User(int age, String name) {
+        this.name = name;
+        this.age = age;
+    }
     public String getName() {
         return name;
     }
@@ -27,4 +32,9 @@ public class User {
     public String getCity() {
         return city;
     }
+
+    public int getAge() {
+        return age;
+    }
+
 }
