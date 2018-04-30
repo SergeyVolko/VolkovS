@@ -43,9 +43,7 @@ public class Departament {
 
     @Override
     public String toString() {
-        return "Departament{" +
-                "depSet=" + depSet +
-                '}';
+        return "Departament{" + "depSet=" + depSet + '}';
     }
 }
 
