@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 
 public class IteratorArrayDuo implements Iterator<Integer> {
     private int[][] value;
-    private int index1 = 0, index2 = 0;
+    private int row = 0, cell = 0;
 
     public IteratorArrayDuo(int[][] value) {
         this.value = value;
@@ -21,15 +21,15 @@ public class IteratorArrayDuo implements Iterator<Integer> {
         if (this.value.length == 0) {
             throw new NoSuchElementException();
         }
-        if (this.value[index1].length == this.index2) {
-            index2 = 0;
-            index1++;
+        if (this.value[row].length == this.cell) {
+            cell = 0;
+            row++;
         }
-        return this.value[this.index1][this.index2++];
+        return this.value[this.row][this.cell++];
     }
 
     @Override
     public boolean hasNext() {
-        return (this.index1 != this.value.length - 1) || (this.index2 != this.value[index1].length);
+        return (this.row != this.value.length - 1) || (this.cell != this.value[row].length);
     }
 }
