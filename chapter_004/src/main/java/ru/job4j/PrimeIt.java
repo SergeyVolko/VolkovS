@@ -11,15 +11,9 @@ import java.util.NoSuchElementException;
 public class PrimeIt implements Iterator<Integer> {
     private int[] values;
     private int index = 0;
-    private int lastIndex = -1;
 
     public PrimeIt(int[] values) {
         this.values = values;
-        for (int i = 0; i < this.values.length; i++) {
-            if (this.searchPrime(this.values[i])) {
-                this.lastIndex = i;
-            }
-        }
     }
 
     private boolean searchPrime(int value) {
@@ -39,15 +33,7 @@ public class PrimeIt implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        boolean flag = false;
-        while (index < this.lastIndex + 1) {
-            if (this.searchPrime(this.values[index])) {
-                flag = true;
-                break;
-            }
-            index++;
-        }
-        if (!flag) {
+        if (!this.hasNext()) {
             throw new NoSuchElementException();
         }
         return this.values[index++];
@@ -55,6 +41,14 @@ public class PrimeIt implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        return index <= this.lastIndex;
+        boolean flag = false;
+        for (int i = this.index; i < this.values.length; i++) {
+            if (this.searchPrime(this.values[i])) {
+                this.index = i;
+                flag = true;
+                break;
+            }
+        }
+        return flag;
     }
 }
