@@ -14,15 +14,13 @@ public class Converter {
             Iterator<Integer> iterator;
 
             private void first() {
-                if (rIt != null && rIt.hasNext()) {
-                    return;
-                }
-                rIt = null;
-                while (it.hasNext()) {
-                    iterator = it.next();
-                    if (iterator.hasNext()) {
-                        rIt = iterator;
-                        break;
+                if (rIt == null || (!rIt.hasNext())) {
+                    while (it.hasNext()) {
+                        iterator = it.next();
+                        if (iterator.hasNext()) {
+                            rIt = iterator;
+                            break;
+                        }
                     }
                 }
             }
@@ -30,16 +28,15 @@ public class Converter {
             @Override
             public boolean hasNext() {
                 first();
-                return rIt != null;
+                return (rIt != null) && (rIt.hasNext());
             }
 
             @Override
             public Integer next() {
                 first();
-                if (rIt == null) {
+                if (!rIt.hasNext()) {
                     throw new NoSuchElementException();
                 }
-
                 return rIt.next();
             }
         };
