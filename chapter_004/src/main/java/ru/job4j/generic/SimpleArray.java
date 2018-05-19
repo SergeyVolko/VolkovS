@@ -33,6 +33,10 @@ public class SimpleArray<T> implements Iterable<T> {
         return this.array[index];
     }
 
+    T[] getArray() {
+        return this.array;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
