@@ -37,13 +37,13 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     public boolean delete(String id) {
         boolean flag = false;
         int index = 0;
-       for (T element : this.simpleArray.getArray()) {
-           if (element != null && element.getId().equals(id)) {
-               this.simpleArray.delete(index);
-               flag = true;
-           }
-           index++;
-       }
+        for (T element : this.simpleArray.getArray()) {
+            if (element != null && element.getId().equals(id)) {
+                this.simpleArray.delete(index);
+                flag = true;
+            }
+            index++;
+        }
         return flag;
     }
 
