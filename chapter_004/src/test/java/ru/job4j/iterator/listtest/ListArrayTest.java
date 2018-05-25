@@ -48,17 +48,11 @@ public class ListArrayTest {
         assertThat(expect, is(listArray.get(4)));
     }
 
-    @Test
+    @Test(expected = ConcurrentModificationException.class)
     public void whenCreateIteratorAndException() {
-        boolean flag = false;
         this.beforeTest();
         Iterator<Integer> iterator = listArray.iterator();
         listArray.add(11);
-        try {
-            iterator.hasNext();
-        } catch (ConcurrentModificationException e) {
-            flag = true;
-        }
-        assertThat(true, is(flag));
+        iterator.hasNext();
     }
 }
