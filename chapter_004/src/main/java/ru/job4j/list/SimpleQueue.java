@@ -1,4 +1,5 @@
 package ru.job4j.list;
+
 /**
  * @author Sergey Volkov (rusobraz@mail.ru)
  * @version $Id$
@@ -8,7 +9,7 @@ package ru.job4j.list;
 public class SimpleQueue<T> {
     private MyLinkedList<T> myLinkedList = new MyLinkedList<>();
 
-    public T poll(){
+    public T poll() {
         return this.myLinkedList.delete();
     }
 
