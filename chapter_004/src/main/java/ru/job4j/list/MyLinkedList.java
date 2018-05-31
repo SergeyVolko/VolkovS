@@ -1,10 +1,15 @@
 package ru.job4j.list;
+/**
+ * @author Sergey Volkov (rusobraz@mail.ru)
+ * @version $Id$
+ * @since 31.05.2018
+ */
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class MyLinkedList<E> implements Iterable<E>{
+public class MyLinkedList<E> implements Iterable<E> {
 
     private Node<E> first = new Node<>(null);
     private Node<E> last;
@@ -26,7 +31,7 @@ public class MyLinkedList<E> implements Iterable<E>{
     public E get(int index) {
         Node<E> result = this.first;
         for (int i = 0; i < index; i++) {
-           result = result.next;
+            result = result.next;
         }
         return result.value;
 
@@ -36,11 +41,19 @@ public class MyLinkedList<E> implements Iterable<E>{
         return this.size;
     }
 
+    public E delete() {
+        Node<E> result = this.first.next;
+        this.first.next = result.next;
+        this.modCount++;
+        return result.value;
+    }
+
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
             int expectedModCount = modCount;
             Node<E> replace = first;
+
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
@@ -68,7 +81,7 @@ public class MyLinkedList<E> implements Iterable<E>{
         E value;
         Node<E> next;
 
-         Node(E value) {
+        Node(E value) {
             this.value = value;
         }
     }
