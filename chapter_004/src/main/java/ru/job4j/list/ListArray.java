@@ -32,6 +32,9 @@ public class ListArray<E> implements Iterable<E> {
         return ((index >= 0) && (index < this.container.length)) ? (E) this.container[index] : null;
     }
 
+    int getCountElement() {
+        return this.countElement;
+    }
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
