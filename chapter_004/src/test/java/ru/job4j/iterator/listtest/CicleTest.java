@@ -9,24 +9,27 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.job4j.list.Cicle;
 
+import javax.xml.soap.Node;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class CicleTest {
-    private Cicle<Integer> cicle;
+    private Cicle cicle;
 
     @Before
     public void initBefore() {
-        cicle = new Cicle<>(new Cicle.Node<>(1), new Cicle.Node<>(2), new Cicle.Node<>(3), new Cicle.Node<>(4));
-        cicle.init();
+        cicle = new Cicle();
+        cicle.init(10000);
     }
 
     @Test
     public void whenHasCicleThenResultTrueOrFalse() {
-        assertThat(cicle.hasCicle(cicle.getFirst()), is(true));
-        cicle.setFour(new Cicle.Node<>(6));
         assertThat(cicle.hasCicle(cicle.getFirst()), is(false));
-        cicle.setThird(cicle.getTwo());
+        cicle.chengeElement(1456, 3890);
         assertThat(cicle.hasCicle(cicle.getFirst()), is(true));
+        cicle.chengeElement(3891, 3890);
+        assertThat(cicle.hasCicle(cicle.getFirst()), is(false));
+
     }
 }

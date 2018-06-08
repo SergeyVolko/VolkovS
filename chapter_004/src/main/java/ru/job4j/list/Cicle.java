@@ -5,35 +5,35 @@ package ru.job4j.list;
  * @version $Id$
  * @since 1.06.2018
  */
-public class Cicle<T> {
+public class Cicle {
 
-    private Node<T> first;
-    private Node<T> two;
-    private Node<T> third;
-    private Node<T> four;
+    private Node<Integer>[] integerNode;
 
-    public Cicle(Node<T> first, Node<T> two, Node<T> third, Node<T> four) {
-        this.first = first;
-        this.two = two;
-        this.third = third;
-        this.four = four;
+    private Node<Integer> first = new Node<>(null);
+
+    public void init(int elements) {
+        integerNode = new Node[elements];
+        for (int i = 0; i < elements; i++) {
+            integerNode[i] = new Node<>(i + 1);
+        }
+
+        for (int i = 0; i < integerNode.length - 1; i++) {
+            integerNode[i].next = integerNode[i + 1];
+        }
+        this.first.next = integerNode[0];
     }
 
-
-    public void init() {
-        first.next = two;
-        two.next = third;
-        third.next = four;
-        four.next = first;
+    public void chengeElement(int firstLink, int secondLink) {
+        this.integerNode[secondLink].next = this.integerNode[firstLink];
     }
 
-    public Node<T> getFirst() {
+    public Node<Integer> getFirst() {
         return first;
     }
 
     public boolean hasCicle(Node<Integer> first) {
-        Node<Integer> result = first;
-        Node<Integer> countResult;
+        Node result = first;
+        Node countResult;
         boolean flag = false;
         while (result.next != null) {
             countResult = first;
@@ -56,39 +56,12 @@ public class Cicle<T> {
         return flag;
     }
 
-    public void setFirst(Node<T> first) {
-        this.first.next = first;
-    }
 
-    public Node<T> getTwo() {
-        return two;
-    }
+    private static class Node<E> {
+        E value;
+        Node next;
 
-    public void setTwo(Node<T> two) {
-        this.two.next = two;
-    }
-
-    public Node<T> getThird() {
-        return third;
-    }
-
-    public void setThird(Node<T> third) {
-        this.third.next = third;
-    }
-
-    public Node<T> getFour() {
-        return four;
-    }
-
-    public void setFour(Node<T> four) {
-        this.four.next = four;
-    }
-
-    public static class Node<T> {
-        T value;
-        Node<T> next;
-
-        public Node(T value) {
+        private Node(E value) {
             this.value = value;
         }
     }
