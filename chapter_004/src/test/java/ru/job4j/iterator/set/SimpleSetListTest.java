@@ -23,13 +23,17 @@ public class SimpleSetListTest {
         simpleSetList.add(3);
         simpleSetList.add(4);
         simpleSetList.add(5);
-        String expect = "12345";
-        StringBuilder result = null;
-        StringBuilder stringBuilder = new StringBuilder();
         Iterator<Integer> iterator = simpleSetList.iterator();
-        while (iterator.hasNext()) {
-            result = stringBuilder.append(iterator.next().toString());
-        }
-        assertThat(expect, is(result.toString()));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is(1));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is(2));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is(3));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is(4));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is(5));
+        assertThat(iterator.hasNext(), is(false));
     }
 }
