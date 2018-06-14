@@ -7,7 +7,7 @@ package ru.job4j.set;
 
 import java.util.Arrays;
 
-public class MyHashTableSet<E extends ItemHesh> {
+public class MyHashTableSet<E> {
     private E[] arrayHash;
     private int size;
     private int countElement = 0;
@@ -17,50 +17,53 @@ public class MyHashTableSet<E extends ItemHesh> {
         this.arrayHash = arrayHash;
     }
 
-    private int hashFunc(int key) {
-        return key % this.size;
+    private int hashFunc(E key) {
+        return key.hashCode() % this.size;
     }
 
-    public boolean add(E item) {
+    public boolean add(E key) {
         boolean flag = false;
-        int index;
+        int index = this.hashFunc(key);
         if (this.countElement == this.size) {
-            E[] array = this.arrayHash;
-            int indexNew;
-            this.arrayHash = (E[]) new ItemHesh[getPrime(this.size)];
-            this.size = this.arrayHash.length;
-            for (int i = 0; i < array.length; i++) {
-                if (array[i] != null) {
-                    indexNew = hashFunc(array[i].getKey());
-                    if (this.arrayHash[indexNew] != null) {
-                        this.countElement--;
-                    }
-                    this.arrayHash[indexNew] = array[i];
-                }
-            }
+            resize();
         }
-        index = hashFunc(item.getKey());
         if (this.arrayHash[index] == null) {
-            this.arrayHash[index] = item;
+            this.arrayHash[index] = key;
             this.countElement++;
             flag = true;
         }
         return flag;
     }
 
-    public boolean contains(E item) {
+    private void resize() {
+        E[] array = this.arrayHash;
+        int indexNew;
+        this.arrayHash = (E[]) new Object[getPrime(this.size)];
+        this.size = this.arrayHash.length;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != null) {
+                indexNew = hashFunc(array[i]);
+                if (this.arrayHash[indexNew] != null) {
+                    this.countElement--;
+                }
+                this.arrayHash[indexNew] = array[i];
+            }
+        }
+    }
+
+    public boolean contains(E key) {
         boolean flag = false;
-        int index = hashFunc(item.getKey());
-        if (this.arrayHash[index].getKey() == item.getKey()) {
+        int index = hashFunc(key);
+        if (this.arrayHash[index] == key) {
             flag = true;
         }
         return flag;
     }
 
-    public boolean remove(E item) {
+    public boolean remove(E key) {
         boolean flag = false;
-        int index = hashFunc(item.getKey());
-        if (this.arrayHash[index] != null && this.arrayHash[index].getKey() == item.getKey()) {
+        int index = hashFunc(key);
+        if (this.arrayHash[index] != null && this.arrayHash[index] == key) {
             this.arrayHash[index] = null;
             flag = true;
             countElement--;

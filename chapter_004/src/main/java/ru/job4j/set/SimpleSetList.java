@@ -13,6 +13,12 @@ public class SimpleSetList<T> implements Iterable<T> {
     private MyLinkedList<T> myLinkedList = new MyLinkedList<>();
 
     public void add(T value) {
+        if (!contain(value)) {
+            this.myLinkedList.add(value);
+        }
+    }
+
+    private boolean contain(T value) {
         boolean flag = false;
         for (T node : this.myLinkedList) {
             if (node.equals(value)) {
@@ -20,9 +26,7 @@ public class SimpleSetList<T> implements Iterable<T> {
                 break;
             }
         }
-        if (!flag) {
-            this.myLinkedList.add(value);
-        }
+        return flag;
     }
 
     @Override
