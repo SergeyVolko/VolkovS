@@ -33,4 +33,12 @@ public class Calendar {
     public String toString() {
         return "Calendar{" + "day=" + day + ", month=" + month + ", year=" + year + '}';
     }
+
+    @Override
+    public int hashCode() {
+        int result = day;
+        result = 31 * result + month;
+        result = 31 * result + year;
+        return result;
+    }
 }
