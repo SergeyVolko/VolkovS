@@ -35,10 +35,14 @@ public class Calendar {
     }
 
     @Override
-    public int hashCode() {
-        int result = day;
-        result = 31 * result + month;
-        result = 31 * result + year;
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Calendar calendar = (Calendar) o;
+
+        if (day != calendar.day) return false;
+        if (month != calendar.month) return false;
+        return year == calendar.year;
     }
 }
