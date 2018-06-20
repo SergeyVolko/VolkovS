@@ -45,4 +45,12 @@ public class Calendar {
         if (month != calendar.month) return false;
         return year == calendar.year;
     }
+
+    @Override
+    public int hashCode() {
+        int result = day;
+        result = 31 * result + month;
+        result = 31 * result + year;
+        return result;
+    }
 }
