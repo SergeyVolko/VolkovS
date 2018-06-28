@@ -18,7 +18,7 @@ public class MyHashTableSet<E> {
     }
 
     private int hashFunc(E key) {
-        return key.hashCode() % this.size;
+        return Math.abs(key.hashCode() % this.size);
     }
 
     public boolean add(E key) {
@@ -54,7 +54,7 @@ public class MyHashTableSet<E> {
     public boolean contains(E key) {
         boolean flag = false;
         int index = hashFunc(key);
-        if (this.arrayHash[index] == key) {
+        if (this.arrayHash[index].equals(key)) {
             flag = true;
         }
         return flag;
