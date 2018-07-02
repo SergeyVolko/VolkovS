@@ -95,5 +95,17 @@ public class TreeTest {
         tree.add(6, 7);
         iterator.hasNext();
     }
+
+    @Test
+    public void whenIsBinaryThenTrueOrFalse() {
+        Tree<Integer> tree = new Tree<>();
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(4, 5);
+        tree.add(5, 6);
+        assertThat(tree.isBinary(), is(true));
+        tree.add(1, 7);
+        assertThat(tree.isBinary(), is(false));
+    }
 }
 
