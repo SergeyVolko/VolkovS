@@ -31,26 +31,6 @@ public class TreeBinary<E extends Comparable<E>> implements Iterable<E> {
         return nodeBinary;
     }
 
-    public static void main(String[] args) {
-        TreeBinary<Integer> treeBinary = new TreeBinary<>();
-        treeBinary.add(5);
-        treeBinary.add(4);
-        treeBinary.add(6);
-        treeBinary.add(7);
-        treeBinary.add(3);
-        treeBinary.add(8);
-        treeBinary.add(2);
-        System.out.println(treeBinary.root.getValue());
-        System.out.println(treeBinary.root.leftChild.getValue());
-        System.out.println(treeBinary.root.rightChild.getValue());
-        System.out.println("/////////////////////////////////////");
-        Iterator<Integer> iterator = treeBinary.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-        }
-
-    }
-
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
