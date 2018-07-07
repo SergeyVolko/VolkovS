@@ -14,33 +14,19 @@ public class Store {
         int dell = 0;
         int insert = 0;
         int replace = 0;
+        int index;
         for (User userPrev : previoues) {
-            if (!current.contains(userPrev)) {
-                if (findId(userPrev.id, current)) {
+            if (current.contains(userPrev)) {
+                index = current.indexOf(userPrev);
+                if (!current.get(index).name.equals(userPrev.name)) {
                     replace++;
-                } else {
-                    dell++;
                 }
+            } else {
+                dell++;
             }
         }
-
-        for (User userCur : current) {
-            if (!findId(userCur.id, previoues) && !previoues.contains(userCur)) {
-                insert++;
-            }
-        }
+        insert = current.size() - (previoues.size() - dell);
         return new Info(dell, insert, replace);
-    }
-
-    private boolean findId(int id, List<User> list) {
-        boolean flag = false;
-        for (User user : list) {
-            if (user.id == id) {
-                flag = true;
-                break;
-            }
-        }
-        return flag;
     }
 
     public static class User {
@@ -63,17 +49,12 @@ public class Store {
 
             User user = (User) o;
 
-            if (id != user.id) {
-                return false;
-            }
-            return name != null ? name.equals(user.name) : user.name == null;
+            return id == user.id;
         }
 
         @Override
         public int hashCode() {
-            int result = id;
-            result = 31 * result + (name != null ? name.hashCode() : 0);
-            return result;
+            return id;
         }
 
         @Override
