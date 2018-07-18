@@ -11,7 +11,10 @@ public class ContainStringTest {
     @Test
     public void whenContainStringThenTrueOrFalse() {
         ContainString containString = new ContainString();
-        Assert.assertThat(containString.contStr("mama", "ojghhmamahg"), is(true));
-        Assert.assertThat(containString.contStr("mama", "ojghhmaamhg"), is(false));
+        Assert.assertThat(containString.contStr("mama", "amma"), is(true));
+        Assert.assertThat(containString.contStr("mama", "maam"), is(true));
+        Assert.assertThat(containString.contStr("mama", "maami"), is(false));
+        Assert.assertThat(containString.contStr("мама", "амам"), is(true));
+        Assert.assertThat(containString.contStr("мама", "мааа"), is(false));
     }
 }

@@ -3,14 +3,19 @@ package ru.job4j.stroki;
 public class ContainString {
 
     public boolean contStr(String in, String dest) {
-        int j = 0;
-        for (int i = 0; i < dest.length(); i++) {
-            if (j < in.length() - 1 && in.charAt(j) == dest.charAt(i)) {
-                j++;
-            } else if ((j > 0)) {
-                break;
+        boolean flag = true;
+        if (in.length() == dest.length()) {
+            for (Character ch : in.toCharArray()) {
+                if (dest.indexOf(ch) < 0) {
+                    flag = false;
+                    break;
+                }
+                dest = dest.replaceFirst(ch.toString(), "");
             }
+        } else {
+            flag = false;
         }
-        return j == in.length() - 1;
+
+        return flag;
     }
 }
