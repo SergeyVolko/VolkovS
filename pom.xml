@@ -19,7 +19,8 @@
         <module>Tracker</module>
         <module>chapter_003</module>
         <module>chapter_004</module>
-	</modules>
+        <module>Chapter_005</module>
+    </modules>
 	 
 	<dependencies>
 		<dependency>
