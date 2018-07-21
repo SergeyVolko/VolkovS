@@ -4,7 +4,7 @@ public class ContainString {
 
     public boolean contStr(String in, String dest) {
         boolean flag = true;
-        if(in.length() == dest.length()) {
+        if (in.length() == dest.length()) {
             for (Character ch : in.toCharArray()) {
                 if (dest.indexOf(ch) < 0) {
                     flag = false;

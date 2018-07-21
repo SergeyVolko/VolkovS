@@ -1,0 +1,61 @@
+If you are interested in the commercial products "Oracle Java SE Advanced", "Oracle Java SE Advanced Desktop" or "Oracle Java SE Suite", please contact your local Oracle Sales Office.
+
+Introduction
+This page describes the Oracle Java SE product editions, Oracle Java Embedded products, and the features available with them. It contains the following sections:
+
+Introducing the Oracle Java SE Product Editions
+
+Introducing the Oracle Java Embedded Products
+
+Installation of Oracle Java SE Product Editions
+
+Installation of Oracle Java Embedded Products
+
+Licensing Considerations and Restricted-Use Licensing
+
+Oracle Java SE Product Editions
+Java SE is available in three different product editions. Each product edition offers different functional capabilities, and is suitable for different kinds of applications and development scenarios.
+
+Java SE
+Java SE includes:
+
+The Java Development Kit (JDK), including the JavaFX Software Development Kit (SDK),
+Java Runtime Environment (JRE), (Server and regular packages)
+JavaFX Runtime,
+JRockit JDK
+The JDK is a superset of the JRE, and contains everything in the JRE, plus tools such as compilers and debuggers for development. A JRE provides a Java Virtual Machine (JVM), the standard class libraries and other components to run applications written in the Java programming language. JavaFX is a client platform designed to enable application developers to easily create and deploy rich internet applications (RIAs) that behave consistently across multiple platforms. Java SE can be used for free internally to run applications and may be redistributed in accordance with the Oracle Binary Code License Agreement for the Java SE Platform Products (the “Java BCLA”). The Java BCLA must be accepted by you prior to download. Java SE does not include the commercial features as defined in the Licensing Considerations and Restricted-Use Licensing section below, but it is easy to upgrade to one of the other Java SE product editions described below that contain those features.
+
+Oracle Java SE Advanced & Oracle Java SE Advanced Desktop
+Oracle Java SE Advanced and Oracle Java SE Advanced Desktop can be purchased from Oracle and they both include Java SE, plus additional features for mission critical enterprise client and server deployments of Java, as well as Java-based ISV applications and solutions. The Oracle Java SE Advanced for Independent Software Vendors & Oracle Java SE Advanced Desktop for Independent Software Vendors products that are available differ only by license terms - commercial features and packages are identical.
+
+The Oracle Java SE Advanced products help maximize up-time and reduce total cost of ownership. Oracle Java SE Advanced and Oracle Java SE Advanced Desktop include Java Mission Control and Flight Recorder (known as JRockit Mission Control and JRockit Flight Recorder when bundled with Oracle JRockit) with near zero overhead profiling and diagnostics in production environments. They provide unprecedented insight and actionable information for any component of any Java application. Deployment and configuration features of the Oracle Java SE Advanced products’ JRE & JDK enable centralized management of Java desktops in the enterprise.
+
+Oracle Java SE Suite
+Oracle Java SE Suite can be purchased from Oracle and includes Oracle Java SE Advanced plus additional features for soft real-time. JRockit Real Time offers extremely low and predictable latencies for standard Java applications. The Oracle Java SE Suite for Independent Software Vendors product that is available differs only by license terms - commercial features and packages are identical.
+
+Oracle Java Embedded Products
+Oracle Java Embedded products include Oracle Java SE Embedded, Oracle Java ME Embedded, Oracle Java ME Embedded Client (OJEC), Oracle Java Wireless Client (OJWC), and Oracle Java SE for embedded use cases, that is, for cases outside the scope of the Java BCLA. Development use of Oracle Java Embedded products is governed by the applicable Oracle Technology Network Developer License Agreement, which must be accepted prior to download. Any commercial or production use and/or distribution of Oracle Java Embedded products is governed by the Oracle Java Binary License and Redistribution Agreement (the “Java BLRA”).
+
+Installation of Java SE Product Editions
+Oracle does not provide installation programs that correspond directly to Java SE, Oracle Java SE Advanced, Oracle Java SE Advanced Desktop and Oracle Java SE Suite. Depending on the products licensed, one or more of the following individual packages must be downloaded:
+
+JRE (Server or regular packages)
+JDK
+Java Advanced Management Console
+Microsoft Windows Installer (MSI) Enterprise JRE Installer
+JavaFX Runtime
+JRockit JDK
+JRockit Mission Control
+Java for Business JRE*
+Java for Business JDK*
+* The legacy Java for Business offering has been replaced with Oracle Java SE Advanced, Oracle Java SE Advanced Desktop or Oracle Java SE Suite.
+Installation of Oracle Java Embedded Products
+Oracle provides installation programs that correspond directly to Oracle Java SE Embedded, Oracle Java ME Embedded and Oracle Java ME Embedded Client (OJEC). The Oracle Java Wireless Client (OJWC) product requires the Oracle Java ME Embedded product and Lightweight User Interface Toolkit. Installation of Oracle Java SE for embedded use cases, that is, Java SE for cases outside the scope of the Java BCLA, is the same as noted in the previous section “Installation of Oracle Java SE Product Editions”, with the requirement of obtaining commercial licenses under the Java BLRA for use and redistribution in all cases.
+
+Licensing Considerations and Restricted-Use Licensing
+Some of the packages described in the Installation of Oracle Java SE Product Editions section above install Commercial Features that are restricted to Oracle Java SE Advanced, Oracle Java SE Advanced Desktop and/or Oracle Java SE Suite. This means that even if you download an Oracle Java SE package for free under the Java BCLA, you must separately license from Oracle (and pay the appropriate license fee) the right to use any Commercial Features, described in Table 1-1 below, included in these packages.
+
+Commercial Feature Availability by Product Edition
+Table 1-1 lists all the Commercial Features and the feature availability for Oracle Java SE Advanced, Oracle Java SE Advanced Desktop and Oracle Java SE Suite. The Y value in a column means that the feature is available in the specified product edition; N means that use of the feature is not permitted in the specified product edition. This table can help you understand the difference between the product editions and determine whether you require Oracle Java SE Advanced or Oracle Java SE Suite.
+
+Commercial Features are not permitted for use with any Oracle Java Embedded Products except as noted in Table 1-1 below specifically for the Oracle Java SE Embedded products.
