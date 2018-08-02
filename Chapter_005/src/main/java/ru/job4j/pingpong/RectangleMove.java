@@ -10,7 +10,7 @@ import javafx.stage.Stage;
  */
 public class RectangleMove implements Runnable {
     private final Rectangle rect;
-    private  Stage stage;
+    private Stage stage;
     private boolean flag = false;
 
     public RectangleMove(Rectangle rect, Stage stage) {
@@ -23,15 +23,15 @@ public class RectangleMove implements Runnable {
         int znakX = 1;
         int znakY = 1;
         while (!Thread.interrupted()) {
-            if (this.rect.getX()<=0 || this.rect.getX() >= 300) {
+            if (this.rect.getX() <= 0 || this.rect.getX() >= 300) {
                 znakX *= -1;
             }
-            if (this.rect.getY()<=0 || this.rect.getY() >= 300) {
+            if (this.rect.getY() <= 0 || this.rect.getY() >= 300) {
                 znakY *= -1;
             }
             this.rect.setX(this.rect.getX() + znakX);
             this.rect.setY(this.rect.getY() + znakY);
-            stage.setOnCloseRequest(event -> this.isPressed());
+            stage.setOnCloseRequest(event -> this.flag = true);
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
@@ -39,12 +39,9 @@ public class RectangleMove implements Runnable {
             }
             if (this.flag) {
                 Thread.currentThread().interrupt();
-                this.isPressed();
+                this.flag = false;
             }
         }
     }
 
-    private void isPressed() {
-        this.flag = !this.flag;
-    }
 }
