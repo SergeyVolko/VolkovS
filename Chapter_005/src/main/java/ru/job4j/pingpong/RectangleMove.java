@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 public class RectangleMove implements Runnable {
     private final Rectangle rect;
     private Stage stage;
-    private boolean flag = false;
 
     public RectangleMove(Rectangle rect, Stage stage) {
         this.rect = rect;
@@ -31,15 +30,11 @@ public class RectangleMove implements Runnable {
             }
             this.rect.setX(this.rect.getX() + znakX);
             this.rect.setY(this.rect.getY() + znakY);
-            stage.setOnCloseRequest(event -> this.flag = true);
+            stage.setOnCloseRequest(event -> Thread.currentThread().interrupt());
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
-            if (this.flag) {
-                Thread.currentThread().interrupt();
-                this.flag = false;
             }
         }
     }
