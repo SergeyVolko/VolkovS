@@ -1,7 +1,6 @@
 package ru.job4j.pingpong;
 
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 
 /**
  * @author Sergey Volkov (rusobraz@mail.ru)
@@ -10,18 +9,16 @@ import javafx.stage.Stage;
  */
 public class RectangleMove implements Runnable {
     private final Rectangle rect;
-    private Stage stage;
 
-    public RectangleMove(Rectangle rect, Stage stage) {
+    public RectangleMove(Rectangle rect) {
         this.rect = rect;
-        this.stage = stage;
     }
 
     @Override
     public void run() {
         int znakX = 1;
         int znakY = 1;
-        while (!Thread.interrupted()) {
+        while (true) {
             if (this.rect.getX() <= 0 || this.rect.getX() >= 300) {
                 znakX *= -1;
             }
@@ -30,11 +27,10 @@ public class RectangleMove implements Runnable {
             }
             this.rect.setX(this.rect.getX() + znakX);
             this.rect.setY(this.rect.getY() + znakY);
-            stage.setOnCloseRequest(event -> Thread.currentThread().interrupt());
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                break;
             }
         }
     }
