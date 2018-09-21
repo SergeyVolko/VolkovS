@@ -1,5 +1,6 @@
 package ru.job4j.pingpong.monitore;
 
+import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
 import java.util.*;
@@ -11,6 +12,7 @@ import java.util.*;
  */
 @ThreadSafe
 public class UserStorage {
+    @GuardedBy("this")
     private Set<User> users = new TreeSet<>(new Comparator<User>() {
         @Override
         public int compare(User o1, User o2) {
@@ -26,7 +28,7 @@ public class UserStorage {
         return users.remove(user) && users.add(user);
     }
 
-    public Set<User> getUsers() {
+    public synchronized Set<User> getUsers() {
         return users;
     }
 
@@ -79,5 +81,4 @@ public class UserStorage {
         userStorage.transfer(1, 2, 10);
         System.out.println(userStorage.getUsers().toString());
     }
-
 }
