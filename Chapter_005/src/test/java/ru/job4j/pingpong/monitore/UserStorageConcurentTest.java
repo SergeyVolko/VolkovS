@@ -20,7 +20,7 @@ public class UserStorageConcurentTest {
         Thread thread1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 0; i < 500; i++) {
+                for (int i = 0; i < 5; i++) {
                     userStorage.transfer(1, 2, 10);
                 }
             }
@@ -29,11 +29,13 @@ public class UserStorageConcurentTest {
         Thread thread2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i = 0; i < 500; i++) {
-                    userStorage.transfer(2, 1, 10);
+                for (int i = 0; i < 5; i++) {
+                    if(!userStorage.transfer(2, 1, 10)) i--;
                 }
             }
         });
+        //System.out.println("Thred1: "+ thread1.getName());
+        //System.out.println("Thred2: "+ thread2.getName());
         thread1.start();
         thread2.start();
         thread1.join();

@@ -65,6 +65,7 @@ public class UserStorage {
                 break;
             }
         }
+        //System.out.println("1: " + this.getUser(1) + " 2: " + this.getUser(2) + "ThreadName: " + Thread.currentThread().getName());
         return flag;
     }
 
