@@ -2,7 +2,7 @@ package ru.job4j;
 /**
  * @author Sergey Volkov (rusobraz@mail.ru)
  * @version $Id$
- * @since 27.01.2018
+ * @since 29.09.2018
  */
 
 import ru.job4j.start.*;
@@ -69,7 +69,7 @@ public class StartUIJOutPutTest {
         String name = tracker.getAll().get(0).getName();
         String[] massShow = {"0", "second test name", "second test desc", "1", "2", id, "new name test", "new desc test", "2", "111", "new name test", "new desc test", "4", id, "4", "111", "5", "new name test", "5", "name", "3", id, "3", id, "6"};
         StubInput input = new StubInput(massShow);
-        new StartUIJ(input, tracker).init();
+        new StartUIJ(input, tracker).initConsumer(StartUIJ::init);
         assertThat(
                 new String(out.toByteArray()),
                 is(

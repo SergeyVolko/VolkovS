@@ -3,10 +3,11 @@ package ru.job4j.start;
 /**
  * @author Sergey Volkov (rusobraz@mail.ru)
  * @version $Id$
- * @since 02.03.2018
+ * @since 29.09.2018
  */
 
-import ru.job4j.models.*;
+
+import java.util.function.Consumer;
 
 public class StartUIJ {
 
@@ -42,6 +43,9 @@ public class StartUIJ {
         } while (!"6".equals(String.valueOf(key)));
     }
 
+    public void initConsumer(Consumer<StartUIJ> consumer) {
+        consumer.accept(this);
+    }
 
     /**
      * Запускт программы.
@@ -49,7 +53,6 @@ public class StartUIJ {
      * @param args
      */
     public static void main(String[] args) {
-        Input input = new ValidateInput(new ConsoleInput());
-        new StartUIJ(input, new Tracker()).init();
+        new StartUIJ(new ValidateInput(new ConsoleInput()), new Tracker()).initConsumer(StartUIJ::init);
     }
 }
