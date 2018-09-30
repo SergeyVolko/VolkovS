@@ -6,12 +6,13 @@ package ru.job4j.start;
 /**
  * @author Sergey Volkov (rusobraz@mail.ru)
  * @version $Id$
- * @since 21.01.2018
+ * @since 29.09.2018
  */
 
 import ru.job4j.models.*;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class Tracker {
     private List<Item> itemList = new ArrayList<>();
@@ -26,7 +27,7 @@ public class Tracker {
     public Item findById(String id) {
         Item result = null;
         for (Item item : this.itemList) {
-            if (item.getId().equals(id)) {
+            if (this.search((n) -> (n.getId().equals(id)), item)) {
                 result = item;
                 result.setId(id);
                 break;
@@ -46,7 +47,7 @@ public class Tracker {
     public void replace(String id, Item item) {
         int index;
         for (Item itemL : this.itemList) {
-            if (itemL.getId().equals(id)) {
+            if (this.search((n) -> (n.getId().equals(id)), itemL)) {
                 index = this.itemList.indexOf(itemL);
                 this.itemList.remove(index);
                 item.setId(id);
@@ -59,7 +60,7 @@ public class Tracker {
     public void delete(String id) {
         int index;
         for (Item item : this.itemList) {
-            if (item != null && item.getId().equals(id)) {
+            if (this.search((n) -> (item != null && n.getId().equals(id)), item)) {
                 index = itemList.indexOf(item);
                 itemList.remove(index);
                 break;
@@ -71,11 +72,14 @@ public class Tracker {
     public List<Item> findByName(String key) {
         List<Item> listName = new ArrayList<>();
         for (Item item : this.itemList) {
-            if (item.getName().equals(key)) {
+            if (this.search((n) -> (n.getName().equals(key)), item)) {
                 listName.add(item);
             }
         }
         return listName;
     }
 
+    private boolean search(Predicate<Item> predicate, Item item) {
+        return predicate.test(item);
+    }
 }

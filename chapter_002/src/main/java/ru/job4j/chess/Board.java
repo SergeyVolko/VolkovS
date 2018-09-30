@@ -1,5 +1,10 @@
 package ru.job4j.chess;
 
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 /**
  * @author Sergey Volkov (rusobraz@mail.ru)
  * @version $Id$
@@ -11,14 +16,14 @@ public class Board {
     public Figure[] figures = new Figure[32];
     public Cell[][] cells = new Cell[8][8];
 
-    public void add(Figure figure) {
+    private Consumer<Figure> consumerFigure = (figure -> {
         int posX = figure.position.getX();
         int posY = figure.position.getY();
         cells[posX][posY] = new Cell(posX, posY);
         this.figures[positionFigure++] = figure;
-    }
+    });
 
-    public Figure search(Cell source) {
+    private Function<Cell, Figure> cellFigureFunction = (source -> {
         Figure figure = null;
         for (int i = 0; i < this.figures.length; i++) {
             if (this.figures[i] != null && this.figures[i].position.getX() == source.getX() && this.figures[i].position.getY() == source.getY()) {
@@ -27,9 +32,9 @@ public class Board {
             }
         }
         return figure;
-    }
+    });
 
-    public boolean searchCell(Cell[] massCell) {
+    private Function<Cell[], Boolean> booleanFunction = (massCell -> {
         boolean flag = true;
         for (int i = 0; i < massCell.length; i++) {
             if (this.cells[massCell[i].getX()][massCell[i].getY()] != null) {
@@ -38,9 +43,9 @@ public class Board {
             }
         }
         return flag;
-    }
+    });
 
-    public void deleteFigure(Cell source) {
+    Consumer<Cell> consumerDelete = (source -> {
         for (int i = 0; i < this.figures.length; i++) {
             if (this.figures[i] != null && this.figures[i].position.getX() == source.getX() && this.figures[i].position.getY() == source.getY()) {
                 this.cells[this.figures[i].position.getX()][this.figures[i].position.getY()] = null;
@@ -52,9 +57,9 @@ public class Board {
                 break;
             }
         }
-    }
+    });
 
-    public boolean move(Cell source, Cell dest) throws ImposibleMoveException, OccupiedWayException, FigureNotFoundException {
+    BiFunction<Cell, Cell, Boolean> moveBiFunction = ((source, dest) -> {
         Figure figure;
         boolean flag = false;
         Cell[] massCell;
@@ -72,9 +77,9 @@ public class Board {
         } else {
             throw new FigureNotFoundException("No figure");
         }
-    }
+    });
 
-    public void moving(Cell source, Cell dest) {
+    BiConsumer<Cell, Cell> movingBiConsumer = ((source, dest) -> {
         Figure figure = null;
         try {
             if (this.move(source, dest)) {
@@ -90,6 +95,30 @@ public class Board {
         } catch (OccupiedWayException e) {
             System.out.println(e);
         }
+    });
+
+    public void add(Figure figure) {
+        this.consumerFigure.accept(figure);
+    }
+
+    public Figure search(Cell source) {
+        return this.cellFigureFunction.apply(source);
+    }
+
+    public boolean searchCell(Cell[] massCell) {
+        return booleanFunction.apply(massCell);
+    }
+
+    public void deleteFigure(Cell source) {
+        consumerDelete.accept(source);
+    }
+
+    public boolean move(Cell source, Cell dest) throws ImposibleMoveException, OccupiedWayException, FigureNotFoundException {
+        return moveBiFunction.apply(source, dest);
+    }
+
+    public void moving(Cell source, Cell dest) {
+        movingBiConsumer.accept(source, dest);
     }
 
     public static void main(String[] args) {

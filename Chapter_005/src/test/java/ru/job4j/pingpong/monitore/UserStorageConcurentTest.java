@@ -1,6 +1,7 @@
 package ru.job4j.pingpong.monitore;
 
 import org.junit.Test;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -30,7 +31,9 @@ public class UserStorageConcurentTest {
             @Override
             public void run() {
                 for (int i = 0; i < 5; i++) {
-                    if(!userStorage.transfer(2, 1, 10)) i--;
+                    if (!userStorage.transfer(2, 1, 10)) {
+                        i--;
+                    }
                 }
             }
         });
