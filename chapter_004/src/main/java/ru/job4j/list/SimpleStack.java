@@ -15,5 +15,9 @@ public class SimpleStack<T> {
     public void push(T value) {
         this.simpleArrayList.add(value);
     }
+
+    public boolean isEmpty() {
+        return this.simpleArrayList.getSize() == 0;
+    }
 }
 
