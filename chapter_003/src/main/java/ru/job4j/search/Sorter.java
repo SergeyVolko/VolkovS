@@ -2,6 +2,7 @@ package ru.job4j.search;
 // Добавить комментарий.
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -31,13 +32,7 @@ public class Sorter {
      */
     // Получим
     List<UserPerson> sortAge(List<UserPerson> list) {
-        list.sort(new Comparator<UserPerson>() {
-            @Override
-            public int compare(UserPerson o1, UserPerson o2) {
-                return Integer.compare(o1.getAge(), o2.getAge());
-            }
-        });
-        return list;
+        return list.stream().sorted(Comparator.comparingInt(UserPerson::getAge)).collect(Collectors.toList());
     }
     // В данный метод нужно добавить комментарий.
 
@@ -49,13 +44,7 @@ public class Sorter {
      * @return
      */
     List<UserPerson> sortNameLength(List<UserPerson> list) {
-        list.sort(new Comparator<UserPerson>() {
-            @Override
-            public int compare(UserPerson o1, UserPerson o2) {
-                return o1.getName().length() - o2.getName().length();
-            }
-        });
-        return list;
+        return list.stream().sorted(Comparator.comparingInt(o -> o.getName().length())).collect(Collectors.toList());
     }
 
     /**
@@ -87,15 +76,10 @@ public class Sorter {
      */
     // Получим упрощенный метод.
     List<UserPerson> sortBoth(List<UserPerson> list) {
-        Comparator<UserPerson> compare = new Comparator<UserPerson>() {
-            @Override
-            public int compare(UserPerson o1, UserPerson o2) {
-                final int rsl = o1.getName().compareTo(o2.getName());
-                return (rsl != 0) ? (rsl) : (Integer.compare(o1.getAge(), o2.getAge()));
-            }
-        };
-        list.sort(compare);
-        return list;
+        return list.stream().sorted((o1, o2) -> {
+            final int rsl = o1.getName().compareTo(o2.getName());
+            return (rsl != 0) ? (rsl) : (Integer.compare(o1.getAge(), o2.getAge()));
+        }).collect(Collectors.toList());
     }
 
 

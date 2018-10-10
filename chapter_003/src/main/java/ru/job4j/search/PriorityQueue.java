@@ -6,6 +6,7 @@ package ru.job4j.search;
  */
 
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 public class PriorityQueue {
     private LinkedList<Task> tasks = new LinkedList<>();
@@ -19,13 +20,7 @@ public class PriorityQueue {
      */
     public void put(Task task) {
         //TODO добавить вставку в связанный список.
-        int index = 0;
-        for (int i = 0; i < this.tasks.size(); i++) {
-            if (task.getPriority() < this.tasks.get(i).getPriority()) {
-                break;
-            }
-            index++;
-        }
+        int index = (int) tasks.stream().filter(task1 -> task1.getPriority() < task.getPriority()).count();
         this.tasks.add(index, task);
     }
 
@@ -37,8 +32,9 @@ public class PriorityQueue {
     public static void main(String[] args) {
         PriorityQueue queue = new PriorityQueue();
         queue.put(new Task("low", 5));
-        queue.put(new Task("urgent", 1));
+        queue.put(new Task("urgent", 7));
         queue.put(new Task("middle", 3));
+        queue.put(new Task("new", 1));
         Task result = queue.take();
         System.out.println(result.getDesc());
     }

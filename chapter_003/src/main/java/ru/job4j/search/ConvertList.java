@@ -6,40 +6,27 @@ package ru.job4j.search;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 public class ConvertList {
     public List<Integer> toList(int[][] array) {
-        List<Integer> integerList = new ArrayList<>();
-        for (int[] i : array) {
-            for (int j : i) {
-                integerList.add(j);
-            }
-        }
-        return integerList;
+        return Arrays.stream(array).flatMapToInt(Arrays::stream).boxed().collect(Collectors.toList());
     }
 
 
     public int[][] toArray(List<Integer> list, int rows) {
-        int massLength = (list.size() / rows) + ((list.size() % rows > 0) ? 1 : 0);
-        int[][] resultArray = new int[rows][massLength];
-        int index = 0;
-        for (Integer i : list) {
-            resultArray[index / massLength][index % massLength] = i;
-            index++;
-        }
-        return resultArray;
+        int cls = list.size() / rows + (list.size() % rows == 0 ? 0 : 1);
+        int[][] array = new int[rows][cls];
+        list.forEach(n -> {
+            array[list.indexOf(n) / cls][list.indexOf(n) % cls] = n;
+        });
+        return array;
     }
 
     public List<Integer> convert(List<int[]> list) {
-        List<Integer> integerList = new ArrayList<>();
-        for (int[] array : list) {
-            for (int i : array) {
-                integerList.add(i);
-            }
-        }
-        return integerList;
+        return list.stream().flatMapToInt(Arrays::stream).boxed().collect(Collectors.toList());
     }
 
     public static void main(String[] args) {
@@ -60,9 +47,7 @@ public class ConvertList {
         list.add(new int[]{1, 2, 3, 4});
         list.add(new int[]{5, 6, 7});
         list.add(new int[]{8, 9});
-        List<Integer> integerList1 = convertList.convert(list);
-        String expect = "[1, 2, 3, 4, 5, 6, 7, 8, 9]";
-        String result = String.format("%s", integerList1);
-        System.out.println(expect + " " + result);
+        System.out.println(convertList.convert(list));
+
     }
 }

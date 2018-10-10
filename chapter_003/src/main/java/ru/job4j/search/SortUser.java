@@ -6,37 +6,23 @@ package ru.job4j.search;
  */
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SortUser {
 
     public Set<UserPerson> sort(List<UserPerson> userList) {
-        Set<UserPerson> userSet = new TreeSet<>(userList);
-        return userSet;
+        return new TreeSet<>(userList);
     }
 
     public List<UserPerson> sortNameLength(List<UserPerson> userList) {
-        List<UserPerson> personList = new ArrayList<>();
-        personList.addAll(userList);
-        personList.sort(new Comparator<UserPerson>() {
-            @Override
-            public int compare(UserPerson o1, UserPerson o2) {
-                return Integer.compare(o1.getName().length(), o2.getName().length());
-            }
-        });
-        return personList;
+        return userList.stream().sorted((Comparator.comparingInt(o -> o.getName().length()))).collect(Collectors.toList());
     }
 
     public List<UserPerson> sortByAllFields(List<UserPerson> userPersonList) {
-        List<UserPerson> personList = new ArrayList<>();
-        personList.addAll(userPersonList);
-        personList.sort(new Comparator<UserPerson>() {
-            @Override
-            public int compare(UserPerson o1, UserPerson o2) {
-                final int rsl = o1.getName().compareTo(o2.getName());
-                return (rsl != 0) ? (rsl) : Integer.compare(o1.getAge(), o2.getAge());
-            }
-        });
-        return personList;
+        return userPersonList.stream().sorted(((o1, o2) -> {
+            final int rsl = o1.getName().compareTo(o2.getName());
+            return (rsl != 0) ? (rsl) : Integer.compare(o1.getAge(), o2.getAge());
+        })).collect(Collectors.toList());
     }
 
     public static void main(String[] args) {
