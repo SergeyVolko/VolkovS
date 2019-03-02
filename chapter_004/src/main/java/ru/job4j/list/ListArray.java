@@ -10,7 +10,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ListArray<E> implements Iterable<E> {
+public class ListArray<E> implements Iterable<E>, ListInterface<E> {
 
     private Object[] container;
     private int countElement = 0;
@@ -20,6 +20,7 @@ public class ListArray<E> implements Iterable<E> {
         this.container = new Object[10];
     }
 
+    @Override
     public void add(E value) {
         if (this.countElement == this.container.length) {
             this.container = Arrays.copyOf(this.container, this.container.length + 10);
@@ -28,13 +29,16 @@ public class ListArray<E> implements Iterable<E> {
         modCount++;
     }
 
+    @Override
     public E get(int index) {
         return ((index >= 0) && (index < this.container.length)) ? (E) this.container[index] : null;
     }
 
-    int getCountElement() {
+    @Override
+    public int getSize() {
         return this.countElement;
     }
+
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
@@ -43,6 +47,7 @@ public class ListArray<E> implements Iterable<E> {
 
             @Override
             public boolean hasNext() {
+                System.out.println(expectedModCount + "=" + modCount);
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
@@ -60,6 +65,14 @@ public class ListArray<E> implements Iterable<E> {
                 return (E) container[indexArray++];
             }
         };
+    }
+
+    @Override
+    public E delete() {
+        E result = (E) this.container[--countElement];
+        this.container[countElement] = null;
+        this.modCount++;
+        return result;
     }
 
     @Override

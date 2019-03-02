@@ -9,7 +9,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class MyLinkedList<E> implements Iterable<E> {
+public class MyLinkedList<E> implements Iterable<E>, ListInterface<E> {
 
     private Node<E> first = new Node<>(null);
     private Node<E> last;
@@ -36,15 +36,19 @@ public class MyLinkedList<E> implements Iterable<E> {
         return result.value;
 
     }
-
+    @Override
     public int getSize() {
         return this.size;
     }
 
-    public E delete() {
+    public  E delete() {
+        if (first == null) {
+            throw new NoSuchElementException();
+        }
         Node<E> result = this.first.next;
         this.first.next = result.next;
         this.modCount++;
+        this.size--;
         return result.value;
     }
 
